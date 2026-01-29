@@ -1,0 +1,16 @@
+---
+title: "Data 607 Week 1 Assignment"
+author: "Kiera Griffiths"
+format: html
+editor: visual
+---
+
+## Approach
+
+## How each state's expense patterns have changed from 2013-2023?
+
+I am curious about spending habits in America and found a data-set that details how much money (reported in millions of US dollars) each state spent, across various expense categories, for the years 1997-2023.
+
+## Spending by state, expense category, and year
+
+Source: https://raw.githubusercontent.com/KieraG2026/U.S.-Spending-Categories-by-State-1997-2023/refs/heads/main/Expense%20Categories%20by%20State%201997-2023.csv

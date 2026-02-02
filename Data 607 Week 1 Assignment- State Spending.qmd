@@ -13,4 +13,40 @@ I am curious about spending habits in America and found a data-set that details 
 
 ## Spending by state, expense category, and year
 
-Source: https://raw.githubusercontent.com/KieraG2026/U.S.-Spending-Categories-by-State-1997-2023/refs/heads/main/Expense%20Categories%20by%20State%201997-2023.csv
+Source: https://raw.githubusercontent.com/KieraG2026/U.S.-Spending-Categories-by-State-1997-2023/main/Expense%20Categories%20by%20State%201997-2023.csv
+
+# Load necessary libraries
+
+library(readr) library(dplyr)
+
+# Load CSV from GitHub
+
+url \<- "https://raw.githubusercontent.com/KieraG2026/U.S.-Spending-Categories-by-State-1997-2023/main/Expense%20Categories%20by%20State%201997-2023.csv" df \<- read_csv(url)
+
+# Rename misnamed year columns 2013-2023
+
+names(df)\[23:33\] \<- 2013:2023
+
+# List of 50 U.S. states
+
+states_50 \<- c( "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware", "Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky", "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi", "Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico", "New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania", "Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont", "Virginia","Washington","West Virginia","Wisconsin","Wyoming" )
+
+# Filter only 50 states
+
+df \<- df \|\> filter(GeoName %in% states_50)
+
+# Filter only Healthcare rows
+
+df_health \<- df \|\> filter(grepl("Health", Description, ignore.case = TRUE))
+
+# Select only state and years 2013-2023
+
+df_health \<- df_health \|\> select(GeoName, `2013`:`2023`)
+
+# Create gt table
+
+health_table \<- df_health \|\> gt() \|\> tab_header( title = "Healthcare Expenses by State (2013–2023)", subtitle = "(in millions of U.S. dollars)" ) \|\> fmt_number( columns = `2013`:`2023`, decimals = 1, use_seps = TRUE )
+
+# Print chart
+
+print(health_table)
